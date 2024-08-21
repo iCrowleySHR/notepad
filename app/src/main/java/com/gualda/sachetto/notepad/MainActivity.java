@@ -3,6 +3,7 @@ package com.gualda.sachetto.notepad;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // URL da API
-        String url = "http://192.168.1.10/api_notepad/public/api/v1/users/validate";
+        String url = "http://192.168.0.43/api_notepad/public/api/v1/users/validate";
 
         // Criar o objeto JSON com os dados do usuário
         JSONObject loginData = new JSONObject();
@@ -82,13 +83,18 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         // Manipule a resposta da API aqui
-                        Toast.makeText(MainActivity.this, "Login bem-sucedido", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "variavel:"+response , Toast.LENGTH_SHORT).show();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this, "Erro ao enviar dados: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                        String errorMessage = error.getMessage();
+                        if (error.networkResponse != null) {
+                            errorMessage += "\nStatus Code: " + error.networkResponse.statusCode;
+                        }
+                        Log.d("MyActivity", errorMessage);
+                        Toast.makeText(MainActivity.this, "Erro ao enviar dados: " + errorMessage, Toast.LENGTH_LONG).show();
                     }
                 }
         );
