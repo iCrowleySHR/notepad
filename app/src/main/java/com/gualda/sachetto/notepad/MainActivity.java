@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // URL da API
-        String url = "http://192.168.0.43/api_notepad/public/api/v1/users/validate";
+        String url = "http://192.168.1.29/api_notepad/public/api/v1/users/validate";
 
         // Criar o objeto JSON com os dados do usuário
         JSONObject loginData = new JSONObject();

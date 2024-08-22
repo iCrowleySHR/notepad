@@ -8,10 +8,10 @@
     tools:context=".CreateAccount">
 
     <LinearLayout
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="729dp"
-        android:layout_marginLeft="0sp"
-        android:layout_marginRight="0sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
