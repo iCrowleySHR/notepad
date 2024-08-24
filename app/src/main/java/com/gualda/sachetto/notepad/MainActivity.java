@@ -1,26 +1,27 @@
 package com.gualda.sachetto.notepad;
 
-import android.content.Intent;
+import static android.content.ContentValues.TAG;
+import static android.text.TextUtils.isEmpty;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.gualda.sachetto.notepad.Activities.CreateAccount;
+import com.gualda.sachetto.notepad.model.User;
+import com.gualda.sachetto.notepad.service.UserService;
+import com.gualda.sachetto.notepad.utils.NavigationUtil;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
     EditText edtEmail, edtPassword;
     Button btnSubmit;
+    TextView txtNotLogged;
+
+
+    private UserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +47,12 @@ public class MainActivity extends AppCompatActivity {
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
         btnSubmit = findViewById(R.id.btnSubmit);
+        txtNotLogged = findViewById(R.id.txtNotLogged);
 
+        userService = new UserService(this);
+
+        txtNotLogged.setOnClickListener(v -> NavigationUtil.navigateTo(this, CreateAccount.class));
         btnSubmit.setOnClickListener(v -> sendData());
-    }
-
-    public void registerIntent(android.view.View view){
-        Intent intent = new Intent(MainActivity.this, CreateAccount.class);
-        startActivity(intent);
     }
 
     private void sendData() {
@@ -60,47 +64,43 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // URL da API
-        String url = "http://192.168.1.29/api_notepad/public/api/v1/users/validate";
+        User user = new User(email, password);
 
-        // Criar o objeto JSON com os dados do usuário
-        JSONObject loginData = new JSONObject();
-        try {
-            loginData.put("email", email);
-            loginData.put("password", password);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Erro ao criar JSON", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        userService.loginUser(user, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
 
-        // Criar uma nova requisição JSON
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.POST, // Método POST
-                url,                 // URL
-                loginData,           // Dados a serem enviados
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // Manipule a resposta da API aqui
-                        Toast.makeText(MainActivity.this, "variavel:"+response , Toast.LENGTH_SHORT).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        String errorMessage = error.getMessage();
-                        if (error.networkResponse != null) {
-                            errorMessage += "\nStatus Code: " + error.networkResponse.statusCode;
-                        }
-                        Log.d("MyActivity", errorMessage);
-                        Toast.makeText(MainActivity.this, "Erro ao enviar dados: " + errorMessage, Toast.LENGTH_LONG).show();
+                if (response.has("data")) {
+
+                    try {
+                        JSONObject data = response.getJSONObject("data");
+                        String id = data.optString("id", "ID não encontrado");
+                        String name = data.optString("name", "Nome não encontrado");
+                        String email = data.optString("email", "Email não encontrado");
+
+                        Toast.makeText(MainActivity.this, "Usuário autenticado!\nID: " + id + "\nName: " + name + "\nEmail: " + email, Toast.LENGTH_LONG).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(MainActivity.this, "Erro ao processar dados", Toast.LENGTH_SHORT).show();
                     }
                 }
-        );
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                try{
+                    String errorBody = new String(error.networkResponse.data, "UTF-8");
+                    JSONObject errorJson = new JSONObject(errorBody);
 
-        // Adicionar a requisição à fila de requisições
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjectRequest);
+                    String errorMessage = errorJson.getString("message");
+
+
+                    Toast.makeText(MainActivity.this, "Erro: " + errorMessage, Toast.LENGTH_LONG).show();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 }

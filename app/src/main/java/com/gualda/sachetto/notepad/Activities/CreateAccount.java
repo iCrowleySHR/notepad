@@ -1,4 +1,4 @@
-package com.gualda.sachetto.notepad;
+package com.gualda.sachetto.notepad.Activities;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -19,11 +19,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.gualda.sachetto.notepad.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Date;
 
 public class CreateAccount extends AppCompatActivity {
 
@@ -93,7 +92,6 @@ public class CreateAccount extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        // Manipule a resposta da API aqui
                         Toast.makeText(CreateAccount.this, "resposta:"+ response, Toast.LENGTH_SHORT).show();
                     }
                 },

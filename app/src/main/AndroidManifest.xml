@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Notepad"
         tools:targetApi="31">
         <activity
-            android:name=".CreateAccount"
+            android:name=".Activities.CreateAccount"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
