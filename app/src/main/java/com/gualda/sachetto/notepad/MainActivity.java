@@ -1,11 +1,9 @@
 package com.gualda.sachetto.notepad;
 
-import static android.content.ContentValues.TAG;
-import static android.text.TextUtils.isEmpty;
+import static com.gualda.sachetto.notepad.utils.NavigationUtil.*;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,12 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.gualda.sachetto.notepad.Activities.CreateAccount;
+import com.gualda.sachetto.notepad.activities.Home;
 import com.gualda.sachetto.notepad.model.User;
 import com.gualda.sachetto.notepad.service.UserService;
-import com.gualda.sachetto.notepad.utils.NavigationUtil;
+import com.gualda.sachetto.notepad.utils.JWT;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnSubmit;
     TextView txtNotLogged;
 
-
     private UserService userService;
+    private JWT jwt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +41,20 @@ public class MainActivity extends AppCompatActivity {
             getWindow().setDecorFitsSystemWindows(false);
         }
 
+        /* Verifica se já existe um token salvo*/
+        jwt = new JWT();
+        String token = jwt.getJwtToken(MainActivity.this);
+        if (token != null && !token.isEmpty()) {
+            navigateTo(this, Home.class);
+        } else {
+            Toast.makeText(MainActivity.this, "Token não encontrado ou inválido", Toast.LENGTH_SHORT).show();
+        }
+
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
         btnSubmit = findViewById(R.id.btnSubmit);
         txtNotLogged = findViewById(R.id.txtNotLogged);
 
-        userService = new UserService(this);
-
-        txtNotLogged.setOnClickListener(v -> NavigationUtil.navigateTo(this, CreateAccount.class));
         btnSubmit.setOnClickListener(v -> sendData());
     }
 
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         User user = new User(email, password);
+        userService = new UserService(this);
 
         userService.loginUser(user, new Response.Listener<JSONObject>() {
             @Override
@@ -73,6 +77,11 @@ public class MainActivity extends AppCompatActivity {
                 if (response.has("data")) {
 
                     try {
+                        String token = response.getString("token");
+                        // Chamando função static de outro arquivo
+                        jwt.saveTokenJWT(MainActivity.this, token);
+                        navigateTo(MainActivity.this,Home.class);
+
                         JSONObject data = response.getJSONObject("data");
                         String id = data.optString("id", "ID não encontrado");
                         String name = data.optString("name", "Nome não encontrado");
