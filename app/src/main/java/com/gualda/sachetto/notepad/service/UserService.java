@@ -1,21 +1,26 @@
 package com.gualda.sachetto.notepad.service;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.gualda.sachetto.notepad.MainActivity;
 import com.gualda.sachetto.notepad.model.User;
+import com.gualda.sachetto.notepad.utils.JWT;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Map;
+
 public class UserService {
     private Context context;
+    User user = new User();
 
     public UserService(Context context) {
         this.context = context;
@@ -34,10 +39,40 @@ public class UserService {
             return;
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, loginData,
-                responseListener, errorListener);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                loginData,
+                responseListener,
+                errorListener);
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(jsonObjectRequest);
     }
+
+    public void logoutUser(User user,Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
+        String url = ApiConfig.BASE_URL + "/users/logout";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                responseListener,
+                errorListener){
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                String token = user.getToken();
+                if (token == null) {
+                    Log.e("Headers", "Token de autenticação não encontrado"+token);
+                }
+                Map<String, String> headers = ApiConfig.configHeaders(token);
+                Log.d("Headers", headers.toString());
+                return headers;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(jsonObjectRequest);
+   }
+
+
 }

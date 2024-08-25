@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private UserService userService;
     private JWT jwt;
+    private final User user = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,12 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        User user = new User(email, password);
+        // Setando os valores na model
+
+        user.setEmail(email);
+        user.setPassword(password);
+
+        // Iniciando o serviço da api para envio
         userService = new UserService(this);
 
         userService.loginUser(user, new Response.Listener<JSONObject>() {

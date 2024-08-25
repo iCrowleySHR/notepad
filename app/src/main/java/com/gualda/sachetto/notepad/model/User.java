@@ -4,11 +4,15 @@ public class User {
     private String email;
     private String password;
 
-    // Construtor
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
+    public String getToken() {
+        return token;
     }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    private String token;
 
     public String getEmail() {
         return email;

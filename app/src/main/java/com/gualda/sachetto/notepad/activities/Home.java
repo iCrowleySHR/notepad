@@ -17,7 +17,7 @@ import com.gualda.sachetto.notepad.utils.JWT;
 public class Home extends AppCompatActivity {
 
     TextView txtLogout;
-    JWT jwt;
+    JWT jwt = new JWT();
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,6 @@ public class Home extends AppCompatActivity {
         txtLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                jwt = new JWT();
                 jwt.destroyTokenJWT(Home.this);
                 finish();
             }
