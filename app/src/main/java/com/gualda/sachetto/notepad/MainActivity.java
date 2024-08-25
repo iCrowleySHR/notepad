@@ -43,12 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         /* Verifica se já existe um token salvo*/
         jwt = new JWT();
-        String token = jwt.getJwtToken(MainActivity.this);
-        if (token != null && !token.isEmpty()) {
-            navigateTo(this, Home.class);
-        } else {
-            Toast.makeText(MainActivity.this, "Token não encontrado ou inválido", Toast.LENGTH_SHORT).show();
-        }
+        jwt.verifyIfExistToken(MainActivity.this);
 
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
@@ -75,10 +70,9 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
 
                 if (response.has("data")) {
-
                     try {
+
                         String token = response.getString("token");
-                        // Chamando função static de outro arquivo
                         jwt.saveTokenJWT(MainActivity.this, token);
                         navigateTo(MainActivity.this,Home.class);
 

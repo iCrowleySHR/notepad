@@ -1,8 +1,14 @@
 package com.gualda.sachetto.notepad.utils;
 
 
+import static com.gualda.sachetto.notepad.utils.NavigationUtil.navigateTo;
+
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
+
+import com.gualda.sachetto.notepad.MainActivity;
+import com.gualda.sachetto.notepad.activities.Home;
 
 public class JWT {
 
@@ -25,5 +31,13 @@ public class JWT {
         editor.apply();
     }
 
+    public void verifyIfExistToken(Context context){
+        String token = this.getJwtToken(context);
+        if (token != null && !token.isEmpty()) {
+            navigateTo(context, Home.class);
+        } else {
+            Toast.makeText(context, "Token não encontrado ou inválido", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 }
