@@ -51,42 +51,40 @@ public class MainActivity extends AppCompatActivity {
         btnSubmit    = findViewById(R.id.btnSubmit);
         txtNotLogged = findViewById(R.id.txtNotLogged);
 
-        btnSubmit.setOnClickListener(v -> sendData());
+        btnSubmit.setOnClickListener(v -> setData());
         txtNotLogged.setOnClickListener(v -> navigateTo(this, CreateAccount.class));
     }
 
-    private void sendData() {
+    private void setData(){
         String email    = edtEmail.getText().toString().trim();
         String password = edtPassword.getText().toString().trim();
 
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();
-            return;
+        }else{
+            // Setando os valores na model
+            user.setEmail(email);
+            user.setPassword(password);
+            this.sendData();
         }
+    }
 
-        // Setando os valores na model
-
-        user.setEmail(email);
-        user.setPassword(password);
-
-        // Iniciando o serviço da api para envio
+    private void sendData() {
         userService = new UserService(this);
-
         userService.loginUser(user, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
                 if (response.has("data")) {
                     try {
-
                         String token = response.getString("token");
                         jwt.saveTokenJWT(MainActivity.this, token);
+
                         navigateTo(MainActivity.this,Home.class);
 
                         JSONObject data = response.getJSONObject("data");
-                        String id = data.optString("id", "ID não encontrado");
-                        String name = data.optString("name", "Nome não encontrado");
-                        String email = data.optString("email", "Email não encontrado");
+                        String id = data.getString("id");
+                        String name = data.getString("name");
+                        String email = data.getString("email");
 
                         Toast.makeText(MainActivity.this, "Usuário autenticado!\nID: " + id + "\nName: " + name + "\nEmail: " + email, Toast.LENGTH_LONG).show();
                     } catch (JSONException e) {
