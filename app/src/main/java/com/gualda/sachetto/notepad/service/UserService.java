@@ -74,5 +74,32 @@ public class UserService {
         requestQueue.add(jsonObjectRequest);
    }
 
+   public void RegisterUser(User user, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
+       String url = ApiConfig.BASE_URL + "/users";
+
+       JSONObject UserData = new JSONObject();
+       try {
+           UserData.put("email", user.getEmail());
+           UserData.put("password", user.getPassword());
+           UserData.put("telephone", user.getTelephone());
+           UserData.put("name", user.getName());
+           UserData.put("birth_date", user.getBirthDate());
+       } catch (JSONException e) {
+           e.printStackTrace();
+           Toast.makeText(context, "Erro ao criar JSON", Toast.LENGTH_SHORT).show();
+           return;
+       }
+
+       JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+               Request.Method.POST,
+               url,
+               UserData,
+               responseListener,
+               errorListener);
+
+       RequestQueue requestQueue = Volley.newRequestQueue(context);
+       requestQueue.add(jsonObjectRequest);
+   }
+
 
 }

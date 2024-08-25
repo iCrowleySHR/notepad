@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">notepad</string>
+    <string name="email">Seu endereço de email</string>
+    <string name="password">Sua senha</string>
+    <string name="submit">Entrar</string>
+    <string name="notAccount">Sem conta? Clique aqui para se cadastrar</string>
+    <string name="name">Seu nome</string>
+    <string name="birth_date">Sua data de aniversário</string>
+    <string name="telephone">Seu número de telefone</string>
 </resources>

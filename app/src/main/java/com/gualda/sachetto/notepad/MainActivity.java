@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.gualda.sachetto.notepad.activities.CreateAccount;
 import com.gualda.sachetto.notepad.activities.Home;
 import com.gualda.sachetto.notepad.model.User;
 import com.gualda.sachetto.notepad.service.UserService;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     TextView txtNotLogged;
 
     private UserService userService;
-    private JWT jwt;
+    private final JWT jwt = new JWT();
     private final User user = new User();
 
     @Override
@@ -43,19 +44,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         /* Verifica se já existe um token salvo*/
-        jwt = new JWT();
         jwt.verifyIfExistToken(MainActivity.this);
 
-        edtEmail = findViewById(R.id.edtEmail);
-        edtPassword = findViewById(R.id.edtPassword);
-        btnSubmit = findViewById(R.id.btnSubmit);
+        edtEmail     = findViewById(R.id.edtEmail);
+        edtPassword  = findViewById(R.id.edtPassword);
+        btnSubmit    = findViewById(R.id.btnSubmit);
         txtNotLogged = findViewById(R.id.txtNotLogged);
 
         btnSubmit.setOnClickListener(v -> sendData());
+        txtNotLogged.setOnClickListener(v -> navigateTo(this, CreateAccount.class));
     }
 
     private void sendData() {
-        String email = edtEmail.getText().toString().trim();
+        String email    = edtEmail.getText().toString().trim();
         String password = edtPassword.getText().toString().trim();
 
         if (email.isEmpty() || password.isEmpty()) {
@@ -102,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject errorJson = new JSONObject(errorBody);
 
                     String errorMessage = errorJson.getString("message");
-
 
                     Toast.makeText(MainActivity.this, "Erro: " + errorMessage, Toast.LENGTH_LONG).show();
                 }catch (Exception e){

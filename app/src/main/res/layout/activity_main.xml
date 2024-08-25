@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress" />
 
         <EditText
@@ -33,21 +33,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Senha"
+            android:hint="@string/password"
             android:inputType="textPassword" />
 
         <Button
             android:id="@+id/btnSubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Entrar" />
+            android:text="@string/submit" />
 
         <TextView
             android:id="@+id/txtNotLogged"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Sem conta? Clique aqui para se cadastrar"
+            android:text="@string/notAccount"
             android:textColor="#00A6FF" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
