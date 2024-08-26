@@ -7,6 +7,15 @@ public class User {
     private String name;
     private String birthDate;
     private String telephone;
+    private String passwordConfirmation;
+
+    public String getPasswordConfirmation() {
+        return passwordConfirmation;
+    }
+
+    public void setPasswordConfirmation(String passwordConfirmation) {
+        this.passwordConfirmation = passwordConfirmation;
+    }
 
     public String getName() {
         return name;

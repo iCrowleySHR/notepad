@@ -41,12 +41,12 @@ public class CreateAccount extends AppCompatActivity {
             return insets;
         });
 
-        edtEmail     = findViewById(R.id.edtEmailRegister);
-        edtName      = findViewById(R.id.edtName);
-        edtBirthDate = findViewById(R.id.edtBirthDate);
-        edtPassword  = findViewById(R.id.edtPasswordRegister);
-        edtTelephone = findViewById(R.id.edtTelephone);
-        btnSubmit    = findViewById(R.id.btnSubmitRegister);
+        edtEmail     = findViewById(R.id.edtEmailUpdate);
+        edtName      = findViewById(R.id.edtNameUpdate);
+        edtBirthDate = findViewById(R.id.edtBirthDateUpdate);
+        edtPassword  = findViewById(R.id.edtPasswordUpdate);
+        edtTelephone = findViewById(R.id.edtTelephoneUpdate);
+        btnSubmit    = findViewById(R.id.btnSubmitUpdate);
 
         btnSubmit.setOnClickListener(v -> setData());
     };

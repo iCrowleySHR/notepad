@@ -1,4 +1,4 @@
-package com.gualda.sachetto.notepad;
+package com.gualda.sachetto.notepad.fragments;
 
 import android.os.Bundle;
 
@@ -7,6 +7,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.gualda.sachetto.notepad.MainActivity;
+import com.gualda.sachetto.notepad.R;
+import com.gualda.sachetto.notepad.activities.UpdateAccount;
+import com.gualda.sachetto.notepad.databinding.FragmentSettingsBinding;
+import com.gualda.sachetto.notepad.utils.JWT;
+import com.gualda.sachetto.notepad.utils.NavigationUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +31,8 @@ public class SettingsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    Button btnLogout, btnUpdateData;
+    JWT jwt;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -48,6 +58,7 @@ public class SettingsFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -59,6 +70,21 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        btnLogout = view.findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                jwt = new JWT();
+                jwt.destroyTokenJWT(SettingsFragment.this.getActivity());
+                NavigationUtil.navigateTo(SettingsFragment.this.getActivity(), MainActivity.class);
+            }
+        });
+
+        btnUpdateData = view.findViewById(R.id.btnUpdateData);
+        btnUpdateData.setOnClickListener(v -> NavigationUtil.navigateTo(SettingsFragment.this.getActivity(), UpdateAccount.class));
+
+        return view;
     }
 }

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CreateAccount">
+    tools:context=".activities.UpdateAccount">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,12 +26,12 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/edtBirthDateUpdate"
+            android:id="@+id/edtEmailUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/birth_date"
-            android:inputType="date" />
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/edtTelephoneUpdate"
@@ -42,25 +42,33 @@
             android:inputType="phone" />
 
         <EditText
+            android:id="@+id/edtCurrentPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Sua senha atual"
+            android:inputType="textPassword" />
+
+        <EditText
             android:id="@+id/edtPasswordUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/password"
+            android:hint="Sua nova senha"
             android:inputType="textPassword" />
 
         <EditText
-            android:id="@+id/edtEmailUpdate"
+            android:id="@+id/edtCurrentPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress" />
+            android:hint="Sua nova senha para confirmação"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/btnSubmitUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/submit" />
+            android:text="@string/send" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
