@@ -10,34 +10,46 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.gualda.sachetto.notepad.CreateNoteFragment;
+import com.gualda.sachetto.notepad.HomeFragment;
 import com.gualda.sachetto.notepad.R;
+import com.gualda.sachetto.notepad.SettingsFragment;
+import com.gualda.sachetto.notepad.databinding.ActivityHomeBinding;
 import com.gualda.sachetto.notepad.utils.JWT;
 
 public class Home extends AppCompatActivity {
-
-    TextView txtLogout;
-    JWT jwt = new JWT();
-    @SuppressLint("MissingInflatedId")
+    ActivityHomeBinding binding;
+    @SuppressLint({"MissingInflatedId", "NonConstantResourceId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.txtLogout), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        setContentView(binding.getRoot());
+        replaceFragment(new HomeFragment());
 
-        txtLogout = findViewById(R.id.txtLogout);
-        txtLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                jwt.destroyTokenJWT(Home.this);
-                finish();
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.home_nav) {
+                replaceFragment(new HomeFragment());
+            } else if (itemId == R.id.create_note_nav) {
+                replaceFragment(new CreateNoteFragment());
+            } else if (itemId == R.id.settings_nav) {
+                replaceFragment(new SettingsFragment());
             }
+            return true;
         });
 
+    }
+
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.commit();
     }
 }
