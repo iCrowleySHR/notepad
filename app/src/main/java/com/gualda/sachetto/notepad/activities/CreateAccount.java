@@ -2,6 +2,7 @@ package com.gualda.sachetto.notepad.activities;
 
 import static com.gualda.sachetto.notepad.utils.NavigationUtil.navigateTo;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +31,7 @@ public class CreateAccount extends AppCompatActivity {
     User user = new User();
     UserService userService = new UserService(this);
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +43,12 @@ public class CreateAccount extends AppCompatActivity {
             return insets;
         });
 
-        edtEmail     = findViewById(R.id.edtEmailUpdate);
-        edtName      = findViewById(R.id.edtNameUpdate);
-        edtBirthDate = findViewById(R.id.edtBirthDateUpdate);
-        edtPassword  = findViewById(R.id.edtPasswordUpdate);
-        edtTelephone = findViewById(R.id.edtTelephoneUpdate);
-        btnSubmit    = findViewById(R.id.btnSubmitUpdate);
+        edtEmail     = findViewById(R.id.edtEmailCreate);
+        edtName      = findViewById(R.id.edtNameCreate);
+        edtBirthDate = findViewById(R.id.edtBirthDateCreate);
+        edtPassword  = findViewById(R.id.edtPasswordCreate);
+        edtTelephone = findViewById(R.id.edtTelephoneCreate);
+        btnSubmit    = findViewById(R.id.btnSubmitCreate);
 
         btnSubmit.setOnClickListener(v -> setData());
     };

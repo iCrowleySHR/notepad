@@ -11,8 +11,7 @@ import android.widget.Button;
 
 import com.gualda.sachetto.notepad.MainActivity;
 import com.gualda.sachetto.notepad.R;
-import com.gualda.sachetto.notepad.activities.UpdateAccount;
-import com.gualda.sachetto.notepad.databinding.FragmentSettingsBinding;
+import com.gualda.sachetto.notepad.activities.UpdatePassword;
 import com.gualda.sachetto.notepad.utils.JWT;
 import com.gualda.sachetto.notepad.utils.NavigationUtil;
 
@@ -31,7 +30,7 @@ public class SettingsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    Button btnLogout, btnUpdateData;
+    Button btnLogout, btnUpdatePassword;
     JWT jwt;
 
     public SettingsFragment() {
@@ -82,8 +81,8 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        btnUpdateData = view.findViewById(R.id.btnUpdateData);
-        btnUpdateData.setOnClickListener(v -> NavigationUtil.navigateTo(SettingsFragment.this.getActivity(), UpdateAccount.class));
+        btnUpdatePassword = view.findViewById(R.id.btnUpdatePassword);
+        btnUpdatePassword.setOnClickListener(v -> NavigationUtil.navigateTo(SettingsFragment.this.getActivity(), UpdatePassword.class));
 
         return view;
     }

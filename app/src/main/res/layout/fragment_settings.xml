@@ -27,5 +27,13 @@
             android:gravity="left|center_vertical"
             android:text="@string/update"
             app:icon="@drawable/baseline_person_24" />
+
+        <Button
+            android:id="@+id/btnUpdatePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left|center_vertical"
+            android:text="Mudar senha"
+            app:icon="@drawable/baseline_password_24" />
     </LinearLayout>
 </FrameLayout>
