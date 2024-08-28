@@ -21,7 +21,6 @@ public class UpdatePassword extends AppCompatActivity {
     private ActivityUpdatePasswordBinding binding;
     User user;
     UserService userService;
-    JWT jwt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +41,10 @@ public class UpdatePassword extends AppCompatActivity {
             Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
         }else{
             user = new User();
-            jwt = new JWT();
 
             user.setPassword(currentPassword);
             user.setNewPassword(newPassword);
             user.setNewPasswordConfirmation(newPasswordConfirmation);
-            user.setToken(jwt.getJwtToken(UpdatePassword.this));
-
             sendData();
         }
     }

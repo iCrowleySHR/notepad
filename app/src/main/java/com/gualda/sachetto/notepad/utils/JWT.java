@@ -42,12 +42,8 @@ public class JWT {
     }
 
     public void destroyTokenJWT(Context context) {
-        // Faz logout da API
-        User user = new User();
-        user.setToken(this.getJwtToken(context));
-
         UserService userService = new UserService(context);
-        userService.logoutUser(user,new Response.Listener<JSONObject>() {
+        userService.logoutUser(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 if (response.has("success")) {
@@ -89,8 +85,6 @@ public class JWT {
         Log.e(TAG, "Token se existe: " + token);
         if (token != null && !token.isEmpty()) {
             navigateTo(context, Home.class);
-        } else {
-            Toast.makeText(context, "Token não encontrado ou inválido", Toast.LENGTH_SHORT).show();
         }
     }
 }

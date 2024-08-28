@@ -29,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
     Button btnSubmit;
     TextView txtNotLogged;
 
-    private UserService userService;
-    private final JWT jwt = new JWT();
-    private final User user = new User();
+    UserService userService;
+    JWT jwt = new JWT();
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         /* Verifica se já existe um token salvo*/
         jwt.verifyIfExistToken(MainActivity.this);
+        user = new User();
 
         edtEmail     = findViewById(R.id.edtEmail);
         edtPassword  = findViewById(R.id.edtPassword);

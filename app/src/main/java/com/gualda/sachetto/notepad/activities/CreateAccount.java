@@ -1,7 +1,5 @@
 package com.gualda.sachetto.notepad.activities;
 
-import static com.gualda.sachetto.notepad.utils.NavigationUtil.navigateTo;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
@@ -16,7 +14,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.gualda.sachetto.notepad.MainActivity;
 import com.gualda.sachetto.notepad.R;
 import com.gualda.sachetto.notepad.model.User;
 import com.gualda.sachetto.notepad.service.UserService;
@@ -27,9 +24,10 @@ public class CreateAccount extends AppCompatActivity {
 
     EditText edtEmail, edtPassword, edtBirthDate, edtTelephone, edtName;
     Button btnSubmit;
+    User user;
+    UserService userService;
 
-    User user = new User();
-    UserService userService = new UserService(this);
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -63,6 +61,7 @@ public class CreateAccount extends AppCompatActivity {
         if(email.isEmpty() || name.isEmpty() || password.isEmpty() || telephone.isEmpty() || birthDate.isEmpty()){
             Toast.makeText(this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();
         }else{
+            user = new User();
             user.setEmail(email);
             user.setPassword(password);
             user.setBirthDate(birthDate);
@@ -73,6 +72,7 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     private void sendData(){
+        userService = new UserService(this);
         userService.registerUser(user, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

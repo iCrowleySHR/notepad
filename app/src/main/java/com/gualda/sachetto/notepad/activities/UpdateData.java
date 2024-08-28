@@ -23,9 +23,8 @@ import org.json.JSONObject;
 public class UpdateData extends AppCompatActivity {
 
     ActivityUpdateDataBinding binding;
-    JWT jwt = new JWT();
-    UserService userService = new UserService(this);
-    User user = new User();
+    UserService userService;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +33,17 @@ public class UpdateData extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
 
-        user.setToken(jwt.getJwtToken(this));
-        userService.readUser(user, new Response.Listener<JSONObject>() {
+        userService = new UserService(this);
+
+
+        userService.readUser( new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 if(response.has("data")){
                     try{
                         JSONObject data = response.getJSONObject("data");
 
+                        user = new User();
                         user.setName(data.getString("name"));
                         user.setEmail(data.getString("email"));
                         user.setTelephone(data.getString("telephone"));
@@ -64,7 +66,7 @@ public class UpdateData extends AppCompatActivity {
 
                     String errorMessage = errorJson.getString("message");
 
-                        Toast.makeText(UpdateData.this, "Erro: " + errorMessage, Toast.LENGTH_LONG).show();
+                    Toast.makeText(UpdateData.this, "Erro: " + errorMessage, Toast.LENGTH_LONG).show();
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -85,7 +87,6 @@ public class UpdateData extends AppCompatActivity {
             user.setEmail(email);
             user.setTelephone(telephone);
             user.setName(name);
-            user.setToken(jwt.getJwtToken(UpdateData.this));
             this.sendData();
         }
     }

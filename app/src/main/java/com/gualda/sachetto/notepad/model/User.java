@@ -3,7 +3,6 @@ package com.gualda.sachetto.notepad.model;
 public class User {
     private String email;
     private String password;
-    private String token;
     private String name;
     private String birthDate;
     private String telephone;
@@ -24,7 +23,7 @@ public class User {
     }
 
     public void setNewPasswordConfirmation(String newPasswordConfirmation) {
-        NewPasswordConfirmation = newPasswordConfirmation;
+        this.NewPasswordConfirmation = newPasswordConfirmation;
     }
 
 
@@ -50,14 +49,6 @@ public class User {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public String getEmail() {

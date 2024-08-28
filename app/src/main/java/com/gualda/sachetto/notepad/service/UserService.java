@@ -48,9 +48,9 @@ public class UserService {
         utilsService.makeRequest(Request.Method.POST, url, loginData, responseListener, errorListener, null);
     }
 
-    public void logoutUser(User user,Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
+    public void logoutUser(Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
         String url = ApiConfig.BASE_URL + "/users/logout";
-        String token = user.getToken();
+        String token = getJwtToken();
 
         utilsService.makeRequest(Request.Method.GET, url, null, responseListener, errorListener, token);
    }
@@ -76,7 +76,7 @@ public class UserService {
 
    public void updatePasswordUser(User user, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener) {
        String url = ApiConfig.BASE_URL + "/users/update";
-       String token = user.getToken();
+       String token = getJwtToken();
 
        JSONObject userData = new JSONObject();
        try {
@@ -92,16 +92,16 @@ public class UserService {
        utilsService.makeRequest(Request.Method.PUT, url, userData, responseListener, errorListener, token);
    }
 
-   public void readUser(User user, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
+   public void readUser(Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
        String url = ApiConfig.BASE_URL + "/users";
-       String token = user.getToken();
+       String token = getJwtToken();
 
        utilsService.makeRequest(Request.Method.GET, url, null, responseListener, errorListener, token);
    }
 
     public void updateData(User user, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener) {
         String url = ApiConfig.BASE_URL + "/users/update";
-        String token = user.getToken();
+        String token = getJwtToken();
 
         JSONObject userData = new JSONObject();
         try {
@@ -115,5 +115,10 @@ public class UserService {
         }
 
         utilsService.makeRequest(Request.Method.PUT, url, userData, responseListener, errorListener, token);
+    }
+
+    private String getJwtToken() {
+        JWT jwt = new JWT();
+        return jwt.getJwtToken(context);
     }
 }
