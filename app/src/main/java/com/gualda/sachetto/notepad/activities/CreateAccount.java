@@ -73,12 +73,12 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     private void sendData(){
-        userService.RegisterUser(user, new Response.Listener<JSONObject>() {
+        userService.registerUser(user, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 if (response.has("data")) {
                     Toast.makeText(CreateAccount.this, "Usuário criado com sucesso", Toast.LENGTH_SHORT).show();
-                    navigateTo(CreateAccount.this, MainActivity.class);
+                    finish();
                 }
             }
         }, new Response.ErrorListener() {

@@ -46,4 +46,9 @@ public class Home extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_layout,fragment);
         fragmentTransaction.commit();
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

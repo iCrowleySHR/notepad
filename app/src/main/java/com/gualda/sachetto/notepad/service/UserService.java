@@ -74,7 +74,7 @@ public class UserService {
         requestQueue.add(jsonObjectRequest);
    }
 
-   public void RegisterUser(User user, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
+   public void registerUser(User user, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
        String url = ApiConfig.BASE_URL + "/users";
 
        JSONObject UserData = new JSONObject();
@@ -101,17 +101,14 @@ public class UserService {
        requestQueue.add(jsonObjectRequest);
    }
 
-   public void UpdateUser(User user, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener) {
+   public void updatePasswordUser(User user, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener) {
        String url = ApiConfig.BASE_URL + "/users/update";
 
        JSONObject UserData = new JSONObject();
        try {
-           UserData.put("email", user.getEmail());
-           UserData.put("password", user.getPassword());
-           UserData.put("password_confirmation", user.getPasswordConfirmation());
-           UserData.put("telephone", user.getTelephone());
-           UserData.put("name", user.getName());
-           UserData.put("birth_date", user.getBirthDate());
+           UserData.put("current_password", user.getPassword());
+           UserData.put("new_password", user.getNewPassword());
+           UserData.put("new_password_confirmation", user.getNewPasswordConfirmation());
        } catch (JSONException e) {
            e.printStackTrace();
            Toast.makeText(context, "Erro ao criar JSON", Toast.LENGTH_SHORT).show();
@@ -123,9 +120,83 @@ public class UserService {
                url,
                UserData,
                responseListener,
-               errorListener);
+               errorListener){
+           @Override
+           public Map<String, String> getHeaders() throws AuthFailureError {
+               String token = user.getToken();
+               if (token == null) {
+                   Log.e("Headers", "Token de autenticação não encontrado"+token);
+               }
+               Map<String, String> headers = ApiConfig.configHeaders(token);
+               Log.d("Headers", headers.toString());
+               return headers;
+           }
+       };
+
 
        RequestQueue requestQueue = Volley.newRequestQueue(context);
        requestQueue.add(jsonObjectRequest);
    }
+
+   public void readUser(User user, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
+       String url = ApiConfig.BASE_URL + "/users";
+
+       JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+               Request.Method.GET,
+               url,
+               null,
+               responseListener,
+               errorListener){
+           @Override
+           public Map<String, String> getHeaders() throws AuthFailureError {
+               String token = user.getToken();
+               if (token == null) {
+                   Log.e("Headers", "Token de autenticação não encontrado"+token);
+               }
+               Map<String, String> headers = ApiConfig.configHeaders(token);
+               Log.d("Headers", headers.toString());
+               return headers;
+           }
+       };
+
+
+       RequestQueue requestQueue = Volley.newRequestQueue(context);
+       requestQueue.add(jsonObjectRequest);
+   }
+
+    public void updateData(User user, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener) {
+        String url = ApiConfig.BASE_URL + "/users/update";
+
+        JSONObject UserData = new JSONObject();
+        try {
+            UserData.put("name", user.getName());
+            UserData.put("telephone", user.getTelephone());
+            UserData.put("email", user.getEmail());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Erro ao criar JSON", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                UserData,
+                responseListener,
+                errorListener){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                String token = user.getToken();
+                if (token == null) {
+                    Log.e("Headers", "Token de autenticação não encontrado"+token);
+                }
+                Map<String, String> headers = ApiConfig.configHeaders(token);
+                Log.d("Headers", headers.toString());
+                return headers;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(jsonObjectRequest);
+    }
 }

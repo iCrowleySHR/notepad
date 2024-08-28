@@ -5,13 +5,23 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.gualda.sachetto.notepad.MainActivity;
 import com.gualda.sachetto.notepad.databinding.ActivityUpdatePasswordBinding;
 import com.gualda.sachetto.notepad.model.User;
+import com.gualda.sachetto.notepad.service.UserService;
+import com.gualda.sachetto.notepad.utils.JWT;
+
+import org.json.JSONObject;
 
 public class UpdatePassword extends AppCompatActivity {
 
     private ActivityUpdatePasswordBinding binding;
     User user;
+    UserService userService;
+    JWT jwt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +38,50 @@ public class UpdatePassword extends AppCompatActivity {
         String newPassword     = binding.edtNewPassword.getText().toString().trim();
         String newPasswordConfirmation = binding.edtNewPasswordConfirmation.getText().toString().trim();
 
-        user = new User();
+        if(currentPassword.isEmpty() || newPassword.isEmpty() || newPasswordConfirmation.isEmpty()){
+            Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+        }else{
+            user = new User();
+            jwt = new JWT();
 
-        user.setPassword(currentPassword);
-        user.setNewPassword(newPassword);
-        user.setNewPasswordConfirmation(newPasswordConfirmation);
+            user.setPassword(currentPassword);
+            user.setNewPassword(newPassword);
+            user.setNewPasswordConfirmation(newPasswordConfirmation);
+            user.setToken(jwt.getJwtToken(UpdatePassword.this));
 
-        sendData();
+            sendData();
+        }
     }
 
     private void sendData(){
+        userService = new UserService(this);
+        userService.updatePasswordUser(user, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if(response.has("message")){
+                        String message = response.getString("message");
+                        Toast.makeText(UpdatePassword.this, "Mensagem: "+message, Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                try{
+                    String errorBody = new String(error.networkResponse.data, "UTF-8");
+                    JSONObject errorJson = new JSONObject(errorBody);
 
+                    String errorMessage = errorJson.getString("message");
+
+                    Toast.makeText(UpdatePassword.this, "Erro: " + errorMessage, Toast.LENGTH_LONG).show();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
