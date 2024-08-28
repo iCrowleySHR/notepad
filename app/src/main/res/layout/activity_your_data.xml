@@ -130,7 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/raleway_bold"
+            android:fontFamily="@font/raleway"
             android:text="Atualizado em:"
             android:textSize="16sp"
             android:textStyle="bold" />
