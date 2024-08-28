@@ -23,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nome:"
+            android:fontFamily="@font/raleway_medium"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -31,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/raleway_medium"
             android:hint="@string/name"
             android:inputType="text" />
 
@@ -39,6 +41,7 @@
             android:id="@+id/labelBirthDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_medium"
             android:layout_marginTop="16dp"
             android:text="Data de Nascimento:"
             android:textSize="16sp"
@@ -48,6 +51,7 @@
             android:id="@+id/edtBirthDateCreate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_medium"
             android:ems="10"
             android:hint="@string/birth_date"
             android:inputType="date" />
@@ -58,6 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:fontFamily="@font/raleway_medium"
             android:text="Telefone:"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -66,6 +71,7 @@
             android:id="@+id/edtTelephoneCreate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_medium"
             android:ems="10"
             android:hint="@string/telephone"
             android:inputType="phone" />
@@ -74,6 +80,7 @@
         <TextView
             android:id="@+id/labelPassword"
             android:layout_width="wrap_content"
+            android:fontFamily="@font/raleway_medium"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Senha:"
@@ -83,6 +90,7 @@
         <EditText
             android:id="@+id/edtPasswordCreate"
             android:layout_width="match_parent"
+            android:fontFamily="@font/raleway_medium"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/password"
@@ -93,6 +101,7 @@
             android:id="@+id/labelEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_medium"
             android:layout_marginTop="16dp"
             android:text="Email:"
             android:textSize="16sp"
@@ -101,6 +110,7 @@
         <EditText
             android:id="@+id/edtEmailCreate"
             android:layout_width="match_parent"
+            android:fontFamily="@font/raleway_medium"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/email"
@@ -110,6 +120,7 @@
         <Button
             android:id="@+id/btnSubmitCreate"
             android:layout_width="match_parent"
+            android:fontFamily="@font/raleway_medium"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="@string/submit"

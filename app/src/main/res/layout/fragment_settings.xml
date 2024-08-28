@@ -15,6 +15,7 @@
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
+            android:fontFamily="@font/raleway_medium"
             android:layout_height="wrap_content"
             android:gravity="left|center_vertical"
             android:text="@string/logout"
@@ -23,6 +24,7 @@
         <Button
             android:id="@+id/btnUpdateData"
             android:layout_width="match_parent"
+            android:fontFamily="@font/raleway_medium"
             android:layout_height="wrap_content"
             android:gravity="left|center_vertical"
             android:text="@string/update"
@@ -31,6 +33,7 @@
         <Button
             android:id="@+id/btnUpdatePassword"
             android:layout_width="match_parent"
+            android:fontFamily="@font/raleway_medium"
             android:layout_height="wrap_content"
             android:gravity="left|center_vertical"
             android:text="Mudar senha"
@@ -39,6 +42,7 @@
         <Button
             android:id="@+id/btnYourData"
             android:layout_width="match_parent"
+            android:fontFamily="@font/raleway_medium"
             android:layout_height="wrap_content"
             android:gravity="left|center_vertical"
             android:text="Seus dados"
