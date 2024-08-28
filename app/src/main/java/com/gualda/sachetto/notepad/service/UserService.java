@@ -19,11 +19,17 @@ import org.json.JSONObject;
 import java.util.Map;
 
 public class UserService {
-    private Context context;
-    User user = new User();
+
+    private final Context context;
+    private final UtilsService utilsService;
 
     public UserService(Context context) {
         this.context = context;
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+
+        // Criando uma instância de UtilsService usando a RequestQueue
+        this.utilsService = new UtilsService(requestQueue);
+
     }
 
     public void loginUser(User user, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener) {
@@ -39,164 +45,75 @@ public class UserService {
             return;
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                loginData,
-                responseListener,
-                errorListener);
-
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(jsonObjectRequest);
+        utilsService.makeRequest(Request.Method.POST, url, loginData, responseListener, errorListener, null);
     }
 
     public void logoutUser(User user,Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
         String url = ApiConfig.BASE_URL + "/users/logout";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null,
-                responseListener,
-                errorListener){
+        String token = user.getToken();
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                String token = user.getToken();
-                if (token == null) {
-                    Log.e("Headers", "Token de autenticação não encontrado"+token);
-                }
-                Map<String, String> headers = ApiConfig.configHeaders(token);
-                Log.d("Headers", headers.toString());
-                return headers;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(jsonObjectRequest);
+        utilsService.makeRequest(Request.Method.GET, url, null, responseListener, errorListener, token);
    }
 
    public void registerUser(User user, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
        String url = ApiConfig.BASE_URL + "/users";
 
-       JSONObject UserData = new JSONObject();
+       JSONObject userData = new JSONObject();
        try {
-           UserData.put("email", user.getEmail());
-           UserData.put("password", user.getPassword());
-           UserData.put("telephone", user.getTelephone());
-           UserData.put("name", user.getName());
-           UserData.put("birth_date", user.getBirthDate());
+           userData.put("email", user.getEmail());
+           userData.put("password", user.getPassword());
+           userData.put("telephone", user.getTelephone());
+           userData.put("name", user.getName());
+           userData.put("birth_date", user.getBirthDate());
        } catch (JSONException e) {
            e.printStackTrace();
            Toast.makeText(context, "Erro ao criar JSON", Toast.LENGTH_SHORT).show();
            return;
        }
 
-       JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-               Request.Method.POST,
-               url,
-               UserData,
-               responseListener,
-               errorListener);
-
-       RequestQueue requestQueue = Volley.newRequestQueue(context);
-       requestQueue.add(jsonObjectRequest);
+       utilsService.makeRequest(Request.Method.POST, url, userData, responseListener, errorListener, null);
    }
 
    public void updatePasswordUser(User user, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener) {
        String url = ApiConfig.BASE_URL + "/users/update";
+       String token = user.getToken();
 
-       JSONObject UserData = new JSONObject();
+       JSONObject userData = new JSONObject();
        try {
-           UserData.put("current_password", user.getPassword());
-           UserData.put("new_password", user.getNewPassword());
-           UserData.put("new_password_confirmation", user.getNewPasswordConfirmation());
+           userData.put("current_password", user.getPassword());
+           userData.put("new_password", user.getNewPassword());
+           userData.put("new_password_confirmation", user.getNewPasswordConfirmation());
        } catch (JSONException e) {
            e.printStackTrace();
            Toast.makeText(context, "Erro ao criar JSON", Toast.LENGTH_SHORT).show();
            return;
        }
 
-       JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-               Request.Method.PUT,
-               url,
-               UserData,
-               responseListener,
-               errorListener){
-           @Override
-           public Map<String, String> getHeaders() throws AuthFailureError {
-               String token = user.getToken();
-               if (token == null) {
-                   Log.e("Headers", "Token de autenticação não encontrado"+token);
-               }
-               Map<String, String> headers = ApiConfig.configHeaders(token);
-               Log.d("Headers", headers.toString());
-               return headers;
-           }
-       };
-
-
-       RequestQueue requestQueue = Volley.newRequestQueue(context);
-       requestQueue.add(jsonObjectRequest);
+       utilsService.makeRequest(Request.Method.PUT, url, userData, responseListener, errorListener, token);
    }
 
    public void readUser(User user, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
        String url = ApiConfig.BASE_URL + "/users";
+       String token = user.getToken();
 
-       JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-               Request.Method.GET,
-               url,
-               null,
-               responseListener,
-               errorListener){
-           @Override
-           public Map<String, String> getHeaders() throws AuthFailureError {
-               String token = user.getToken();
-               if (token == null) {
-                   Log.e("Headers", "Token de autenticação não encontrado"+token);
-               }
-               Map<String, String> headers = ApiConfig.configHeaders(token);
-               Log.d("Headers", headers.toString());
-               return headers;
-           }
-       };
-
-
-       RequestQueue requestQueue = Volley.newRequestQueue(context);
-       requestQueue.add(jsonObjectRequest);
+       utilsService.makeRequest(Request.Method.GET, url, null, responseListener, errorListener, token);
    }
 
     public void updateData(User user, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener) {
         String url = ApiConfig.BASE_URL + "/users/update";
+        String token = user.getToken();
 
-        JSONObject UserData = new JSONObject();
+        JSONObject userData = new JSONObject();
         try {
-            UserData.put("name", user.getName());
-            UserData.put("telephone", user.getTelephone());
-            UserData.put("email", user.getEmail());
+            userData.put("name", user.getName());
+            userData.put("telephone", user.getTelephone());
+            userData.put("email", user.getEmail());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(context, "Erro ao criar JSON", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.PUT,
-                url,
-                UserData,
-                responseListener,
-                errorListener){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                String token = user.getToken();
-                if (token == null) {
-                    Log.e("Headers", "Token de autenticação não encontrado"+token);
-                }
-                Map<String, String> headers = ApiConfig.configHeaders(token);
-                Log.d("Headers", headers.toString());
-                return headers;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(jsonObjectRequest);
+        utilsService.makeRequest(Request.Method.PUT, url, userData, responseListener, errorListener, token);
     }
 }
