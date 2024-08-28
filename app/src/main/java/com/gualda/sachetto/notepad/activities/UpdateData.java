@@ -1,6 +1,7 @@
 package com.gualda.sachetto.notepad.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -43,18 +44,14 @@ public class UpdateData extends AppCompatActivity {
                     try{
                         JSONObject data = response.getJSONObject("data");
 
-                        user = new User();
-                        user.setName(data.getString("name"));
-                        user.setEmail(data.getString("email"));
-                        user.setTelephone(data.getString("telephone"));
-
+                        binding.edtUpdateEmail.setText(data.getString("name"));
+                        binding.edtUpdateName.setText(data.getString("email"));
+                        binding.edtUpdateTelephone.setText(data.getString("telephone"));
                     }catch (Exception e){
-                        e.printStackTrace();
+                        Log.e("Exception","Exception", e);
                     }
 
-                    binding.edtUpdateEmail.setText(user.getEmail());
-                    binding.edtUpdateName.setText(user.getName());
-                    binding.edtUpdateTelephone.setText(user.getTelephone());
+
                 }
             }
         }, new Response.ErrorListener() {

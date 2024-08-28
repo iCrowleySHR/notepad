@@ -2,6 +2,7 @@ package com.gualda.sachetto.notepad.activities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -91,7 +92,7 @@ public class CreateAccount extends AppCompatActivity {
 
                     Toast.makeText(CreateAccount.this, "Erro: " + errorMessage, Toast.LENGTH_LONG).show();
                 }catch (Exception e){
-                    e.printStackTrace();
+                    Log.e("Exception","Exception", e);
                 }
             }
         });

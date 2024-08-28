@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.YourData">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Título -->
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dados do Usuário"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:gravity="center" />
+
+        <!-- Nome -->
+        <TextView
+            android:id="@+id/labelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome:"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nome do Usuário"
+            android:textSize="20sp" />
+
+        <!-- Email -->
+        <TextView
+            android:id="@+id/labelEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/txtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="email@example.com"
+            android:textSize="20sp" />
+
+        <!-- Telefone -->
+        <TextView
+            android:id="@+id/labelTelephone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telefone:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/txtTelephone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Telefone do Usuário"
+            android:textSize="20sp" />
+
+        <!-- Data de Nascimento -->
+        <TextView
+            android:id="@+id/labelBirthDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data de Nascimento:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/txtBirthDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data de Nascimento do Usuário"
+            android:textSize="20sp" />
+
+        <!-- Data de Criação -->
+        <TextView
+            android:id="@+id/labelCreatedAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Criado em:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/txtCreatedAt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data de Criação"
+            android:textSize="20sp" />
+
+        <!-- Data de Atualização -->
+        <TextView
+            android:id="@+id/labelUpdateAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Atualizado em:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/txtUpdateAt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data de Atualização"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

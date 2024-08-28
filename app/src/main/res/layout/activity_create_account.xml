@@ -12,10 +12,19 @@
         android:layout_height="match_parent"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Nome -->
+        <TextView
+            android:id="@+id/labelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome:"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtNameCreate"
@@ -25,6 +34,16 @@
             android:hint="@string/name"
             android:inputType="text" />
 
+        <!-- Data de Nascimento -->
+        <TextView
+            android:id="@+id/labelBirthDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Data de Nascimento:"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/edtBirthDateCreate"
             android:layout_width="match_parent"
@@ -32,6 +51,16 @@
             android:ems="10"
             android:hint="@string/birth_date"
             android:inputType="date" />
+
+        <!-- Telefone -->
+        <TextView
+            android:id="@+id/labelTelephone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Telefone:"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtTelephoneCreate"
@@ -41,6 +70,16 @@
             android:hint="@string/telephone"
             android:inputType="phone" />
 
+        <!-- Senha -->
+        <TextView
+            android:id="@+id/labelPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Senha:"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/edtPasswordCreate"
             android:layout_width="match_parent"
@@ -48,6 +87,16 @@
             android:ems="10"
             android:hint="@string/password"
             android:inputType="textPassword" />
+
+        <!-- Email -->
+        <TextView
+            android:id="@+id/labelEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Email:"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtEmailCreate"
@@ -57,10 +106,12 @@
             android:hint="@string/email"
             android:inputType="textEmailAddress" />
 
+        <!-- Botão de Enviar -->
         <Button
             android:id="@+id/btnSubmitCreate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:text="@string/submit"
             app:icon="@drawable/baseline_send_24"
             app:iconGravity="textStart" />

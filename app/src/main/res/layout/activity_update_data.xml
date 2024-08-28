@@ -12,10 +12,19 @@
         android:layout_height="match_parent"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Rótulo para o campo de nome -->
+        <TextView
+            android:id="@+id/labelUpdateName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome:"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtUpdateName"
@@ -25,6 +34,20 @@
             android:hint="Digite o seu novo nome"
             android:inputType="text" />
 
+        <!-- Espaçamento entre campos -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <!-- Rótulo para o campo de email -->
+        <TextView
+            android:id="@+id/labelUpdateEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email:"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/edtUpdateEmail"
             android:layout_width="match_parent"
@@ -33,6 +56,20 @@
             android:hint="Digite o seu novo email"
             android:inputType="textEmailAddress" />
 
+        <!-- Espaçamento entre campos -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <!-- Rótulo para o campo de telefone -->
+        <TextView
+            android:id="@+id/labelUpdateTelephone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telefone:"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/edtUpdateTelephone"
             android:layout_width="match_parent"
@@ -40,6 +77,11 @@
             android:ems="10"
             android:hint="Digite o seu novo número"
             android:inputType="phone" />
+
+        <!-- Espaçamento entre campos -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
 
         <Button
             android:id="@+id/btnUpdateData"

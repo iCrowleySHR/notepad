@@ -1,6 +1,7 @@
 package com.gualda.sachetto.notepad.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -61,7 +62,7 @@ public class UpdatePassword extends AppCompatActivity {
                         finish();
                     }
                 }catch(Exception e){
-                    e.printStackTrace();
+                    Log.e("Exception","Exception", e);
                 }
             }
         }, new Response.ErrorListener() {

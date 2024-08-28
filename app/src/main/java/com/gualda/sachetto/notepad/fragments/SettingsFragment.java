@@ -13,6 +13,7 @@ import com.gualda.sachetto.notepad.MainActivity;
 import com.gualda.sachetto.notepad.R;
 import com.gualda.sachetto.notepad.activities.UpdateData;
 import com.gualda.sachetto.notepad.activities.UpdatePassword;
+import com.gualda.sachetto.notepad.activities.YourData;
 import com.gualda.sachetto.notepad.utils.JWT;
 import com.gualda.sachetto.notepad.utils.NavigationUtil;
 
@@ -31,7 +32,7 @@ public class SettingsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    Button btnLogout, btnUpdatePassword, btnUpdateData;
+    Button btnLogout, btnUpdatePassword, btnUpdateData, btnYourData;
     JWT jwt;
 
     public SettingsFragment() {
@@ -88,6 +89,8 @@ public class SettingsFragment extends Fragment {
         btnUpdatePassword = view.findViewById(R.id.btnUpdatePassword);
         btnUpdatePassword.setOnClickListener(v -> NavigationUtil.navigateTo(SettingsFragment.this.getActivity(), UpdatePassword.class));
 
+        btnYourData = view.findViewById(R.id.btnYourData);
+        btnYourData.setOnClickListener(v -> NavigationUtil.navigateTo(SettingsFragment.this.getActivity(), YourData.class));
         return view;
     }
 }

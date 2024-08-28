@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/txtLogout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -12,13 +11,21 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:gravity="center_vertical"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:gravity="center"
-        tools:layout_editor_absoluteY="220dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Rótulo para o campo de email -->
+        <TextView
+            android:id="@+id/labelEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email:"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtEmail"
@@ -28,6 +35,20 @@
             android:hint="@string/email"
             android:inputType="textEmailAddress" />
 
+        <!-- Espaçamento entre campos -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <!-- Rótulo para o campo de senha -->
+        <TextView
+            android:id="@+id/labelPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Senha:"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/edtPassword"
             android:layout_width="match_parent"
@@ -35,6 +56,11 @@
             android:ems="10"
             android:hint="@string/password"
             android:inputType="textPassword" />
+
+        <!-- Espaçamento entre campos -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
 
         <Button
             android:id="@+id/btnSubmit"
