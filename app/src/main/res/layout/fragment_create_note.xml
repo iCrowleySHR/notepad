@@ -1,14 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.CreateNoteFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        >
+
+        <TextView
+            android:id="@+id/txtTitleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Título"
+            android:textSize="18sp"
+            android:fontFamily="@font/raleway_bold"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"/>
+
+        <EditText
+            android:id="@+id/edtTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Digite o título"
+            android:inputType="text"
+            android:fontFamily="@font/raleway_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtTitleLabel"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:id="@+id/txtCategoryLabel"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/raleway_bold"
+            android:layout_height="wrap_content"
+            android:text="Categoria"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edtTitle"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"/>
+
+        <EditText
+            android:id="@+id/edtCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Digite a categoria"
+            android:inputType="text"
+            android:fontFamily="@font/raleway_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtCategoryLabel"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:id="@+id/txtContentLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Conteúdo"
+            android:fontFamily="@font/raleway_bold"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edtCategory"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"/>
+
+        <EditText
+            android:id="@+id/edtContent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:hint="Digite o conteúdo"
+            android:fontFamily="@font/raleway_medium"
+            android:inputType="textMultiLine"
+            android:lines="10"
+            android:gravity="top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtContentLabel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
