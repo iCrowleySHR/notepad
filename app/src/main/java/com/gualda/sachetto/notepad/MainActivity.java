@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.gualda.sachetto.notepad.activities.CreateAccount;
 import com.gualda.sachetto.notepad.activities.Home;
+import com.gualda.sachetto.notepad.databinding.ActivityMainBinding;
 import com.gualda.sachetto.notepad.model.User;
 import com.gualda.sachetto.notepad.service.UserService;
 import com.gualda.sachetto.notepad.utils.JWT;
@@ -25,40 +26,36 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText edtEmail, edtPassword;
-    Button btnSubmit;
-    TextView txtNotLogged;
+    ActivityMainBinding binding;
 
     UserService userService;
-    JWT jwt = new JWT();
+    JWT jwt;
     User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             getWindow().setDecorFitsSystemWindows(false);
         }
 
+        jwt = new JWT();
         /* Verifica se já existe um token salvo*/
         jwt.verifyIfExistToken(MainActivity.this);
         user = new User();
 
-        edtEmail     = findViewById(R.id.edtEmail);
-        edtPassword  = findViewById(R.id.edtPassword);
-        btnSubmit    = findViewById(R.id.btnSubmit);
-        txtNotLogged = findViewById(R.id.txtNotLogged);
-
-        btnSubmit.setOnClickListener(v -> setData());
-        txtNotLogged.setOnClickListener(v -> navigateTo(this, CreateAccount.class));
+        binding.btnSubmit.setOnClickListener(v -> setData());
+        binding.txtNotLogged.setOnClickListener(v -> navigateTo(this, CreateAccount.class));
     }
 
     private void setData(){
-        String email    = edtEmail.getText().toString().trim();
-        String password = edtPassword.getText().toString().trim();
+        String email    = binding.edtEmail.getText().toString().trim();
+        String password = binding.edtPassword.getText().toString().trim();
 
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();

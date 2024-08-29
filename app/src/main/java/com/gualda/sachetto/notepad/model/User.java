@@ -1,13 +1,7 @@
 package com.gualda.sachetto.notepad.model;
 
 public class User {
-    private String email;
-    private String password;
-    private String name;
-    private String birthDate;
-    private String telephone;
-    private String newPassword;
-    private String NewPasswordConfirmation;
+    private String email, password, name, birthDate, telephone, newPassword, NewPasswordConfirmation;
 
 
     public String getNewPassword() {
