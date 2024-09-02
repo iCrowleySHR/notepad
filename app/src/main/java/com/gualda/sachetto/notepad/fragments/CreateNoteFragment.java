@@ -14,6 +14,8 @@ import com.android.volley.VolleyError;
 import com.gualda.sachetto.notepad.R;
 import com.gualda.sachetto.notepad.model.Note;
 import com.gualda.sachetto.notepad.service.NoteService;
+import com.gualda.sachetto.notepad.utils.NavigationUtil;
+
 import org.json.JSONObject;
 
 public class CreateNoteFragment extends Fragment {
@@ -84,6 +86,7 @@ public class CreateNoteFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 if (response.has("data")) {
+                    NavigationUtil.navigateToFragment(getParentFragmentManager(), new HomeFragment());
                     Toast.makeText(CreateNoteFragment.this.getActivity(), "Anotação criada!", Toast.LENGTH_SHORT).show();
                 }
             }

@@ -44,6 +44,13 @@ public class NoteService {
         utilsService.makeRequest(Request.Method.POST, url, noteData, responseListener, errorListener, token);
     }
 
+    public void readNote(Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
+        String url = ApiConfig.BASE_URL + "/notes";
+        String token = getJwtToken();
+
+        utilsService.makeRequest(Request.Method.GET, url, null, responseListener, errorListener, token);
+    }
+
     private String getJwtToken() {
         JWT jwt = new JWT();
         return jwt.getJwtToken(context);

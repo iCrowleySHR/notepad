@@ -16,7 +16,6 @@
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_medium"
             android:gravity="left|center_vertical"
             android:text="@string/logout"
             app:icon="@drawable/baseline_logout_24" />
@@ -25,7 +24,6 @@
             android:id="@+id/btnUpdateData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_medium"
             android:gravity="left|center_vertical"
             android:text="@string/update"
             app:icon="@drawable/baseline_person_24" />
@@ -34,7 +32,6 @@
             android:id="@+id/btnUpdatePassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_medium"
             android:gravity="left|center_vertical"
             android:text="Mudar senha"
             app:icon="@drawable/baseline_password_24" />
@@ -43,7 +40,6 @@
             android:id="@+id/btnYourData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_medium"
             android:gravity="left|center_vertical"
             android:text="Seus dados"
             app:icon="@drawable/baseline_emoji_people_24"

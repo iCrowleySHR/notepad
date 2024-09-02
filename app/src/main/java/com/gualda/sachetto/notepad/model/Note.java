@@ -1,6 +1,7 @@
 package com.gualda.sachetto.notepad.model;
 
 public class Note {
+    private String title, content, category;
     public String getTitle() {
         return title;
     }
@@ -25,5 +26,5 @@ public class Note {
         this.category = category;
     }
 
-    private String title, content, category;
+
 }

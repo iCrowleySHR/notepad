@@ -25,7 +25,6 @@
             android:layout_height="wrap_content"
             android:text="Dados do Usuário"
             android:textSize="36sp"
-            android:fontFamily="@font/raleway_medium"
             android:textStyle="bold"
             android:layout_marginBottom="16dp"
             android:gravity="center" />
@@ -35,7 +34,6 @@
             android:id="@+id/labelName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_bold"
             android:text="Nome:"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -44,7 +42,6 @@
             android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway"
             android:text="Nome do Usuário"
             android:textSize="20sp" />
 
@@ -54,7 +51,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/raleway_bold"
             android:text="Email:"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -63,7 +59,6 @@
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway"
             android:text="email@example.com"
             android:textSize="20sp" />
 
@@ -73,7 +68,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/raleway_bold"
             android:text="Telefone:"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -82,7 +76,6 @@
             android:id="@+id/txtTelephone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway"
             android:text="Telefone do Usuário"
             android:textSize="20sp" />
 
@@ -92,7 +85,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/raleway_bold"
             android:text="Data de Nascimento:"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -101,7 +93,6 @@
             android:id="@+id/txtBirthDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway"
             android:text="Data de Nascimento do Usuário"
             android:textSize="20sp" />
 
@@ -111,7 +102,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/raleway_bold"
             android:text="Criado em:"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -120,7 +110,6 @@
             android:id="@+id/txtCreatedAt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_medium"
             android:text="Data de Criação"
             android:textSize="20sp" />
 
@@ -130,7 +119,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/raleway"
             android:text="Atualizado em:"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -139,7 +127,6 @@
             android:id="@+id/txtUpdateAt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway"
             android:text="Data de Atualização"
             android:textSize="20sp" />
 

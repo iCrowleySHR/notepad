@@ -9,72 +9,65 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="0dp">
 
         <TextView
             android:id="@+id/txtTitleLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="Título"
             android:textSize="18sp"
-            android:fontFamily="@font/raleway_bold"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Digite o título"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/bordered_edittext"
-            android:inputType="text"
-            android:fontFamily="@font/raleway_medium"
-            android:layout_marginBottom="16dp" />
+            android:hint="Digite o título"
+            android:inputType="text" />
 
         <TextView
             android:id="@+id/txtCategoryLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="Categoria"
             android:textSize="18sp"
-            android:fontFamily="@font/raleway_bold"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Digite a categoria"
-            android:inputType="text"
-            android:fontFamily="@font/raleway_medium"
             android:layout_marginBottom="16dp"
             android:background="@drawable/bordered_edittext"
-            />
+            android:hint="Digite a categoria"
+            android:inputType="text" />
 
         <TextView
             android:id="@+id/txtContentLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="Conteúdo"
             android:textSize="18sp"
-            android:fontFamily="@font/raleway_bold"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"
-            />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtContent"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:hint="Digite o conteúdo"
-            android:fontFamily="@font/raleway_medium"
-            android:inputType="textMultiLine"
-            android:lines="10"
+            android:background="@drawable/bordered_edittext"
             android:gravity="top"
-            android:background="@drawable/bordered_edittext" />
+            android:hint="Digite o conteúdo"
+            android:inputType="textMultiLine"
+            android:lines="10" />
 
         <View
             android:layout_width="match_parent"
