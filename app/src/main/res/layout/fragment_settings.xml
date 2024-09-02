@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:gravity="left|center_vertical"
             android:text="@string/logout"
+            app:backgroundTint="@color/blue"
             app:icon="@drawable/baseline_logout_24" />
 
         <Button
@@ -26,6 +27,7 @@
             android:layout_height="wrap_content"
             android:gravity="left|center_vertical"
             android:text="@string/update"
+            app:backgroundTint="@color/blue"
             app:icon="@drawable/baseline_person_24" />
 
         <Button
@@ -34,6 +36,7 @@
             android:layout_height="wrap_content"
             android:gravity="left|center_vertical"
             android:text="Mudar senha"
+            app:backgroundTint="@color/blue"
             app:icon="@drawable/baseline_password_24" />
 
         <Button
@@ -42,6 +45,7 @@
             android:layout_height="wrap_content"
             android:gravity="left|center_vertical"
             android:text="Seus dados"
+            app:backgroundTint="@color/blue"
             app:icon="@drawable/baseline_emoji_people_24"
             app:iconGravity="textStart" />
     </LinearLayout>

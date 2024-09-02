@@ -66,7 +66,8 @@
             android:id="@+id/btnSubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/submit" />
+            android:text="@string/submit"
+            app:backgroundTint="@color/blue" />
 
         <TextView
             android:id="@+id/txtNotLogged"

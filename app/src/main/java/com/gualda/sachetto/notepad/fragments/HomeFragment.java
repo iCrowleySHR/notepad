@@ -1,15 +1,18 @@
 package com.gualda.sachetto.notepad.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.gualda.sachetto.notepad.activities.NoteDetails;
 import com.gualda.sachetto.notepad.R;
 import com.gualda.sachetto.notepad.adapter.NoteAdapter;
 import com.gualda.sachetto.notepad.model.Note;
@@ -65,6 +68,22 @@ public class HomeFragment extends Fragment {
         noteService = new NoteService(getContext());
         fetchNotes();
 
+        listViewNotes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Note selectedNote = notesList.get(position);
+                Intent intent = new Intent(getContext(), NoteDetails.class);
+
+                intent.putExtra("title", selectedNote.getTitle());
+                intent.putExtra("content", selectedNote.getContent());
+                intent.putExtra("category", selectedNote.getCategory());
+                intent.putExtra("id", selectedNote.getIdNote());
+
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 
@@ -78,6 +97,7 @@ public class HomeFragment extends Fragment {
                     for (int i = 0; i < notesArray.length(); i++) {
                         JSONObject noteObject = notesArray.getJSONObject(i);
                         String title = noteObject.getString("title");
+                        String id = noteObject.getString("id");
                         String content = noteObject.getString("content");
                         String category = noteObject.optString("category", "Sem categoria");
                         
@@ -85,6 +105,7 @@ public class HomeFragment extends Fragment {
                         note.setTitle(title);
                         note.setContent(content);
                         note.setCategory(category);
+                        note.setIdNote(id);
                         notesList.add(note);
                     }
                 } catch (JSONException e) {

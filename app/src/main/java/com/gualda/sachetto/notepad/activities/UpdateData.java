@@ -35,8 +35,6 @@ public class UpdateData extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         userService = new UserService(this);
-
-
         userService.readUser( new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -50,8 +48,6 @@ public class UpdateData extends AppCompatActivity {
                     }catch (Exception e){
                         Log.e("Exception","Exception", e);
                     }
-
-
                 }
             }
         }, new Response.ErrorListener() {

@@ -110,4 +110,5 @@ public class CreateNoteFragment extends Fragment {
             }
         });
     }
+
 }

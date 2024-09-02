@@ -22,7 +22,6 @@ public class NoteService {
         this.context = context;
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
-        // Criando uma instância de UtilsService usando a RequestQueue
         this.utilsService = new UtilsService(requestQueue);
     }
 
@@ -49,6 +48,20 @@ public class NoteService {
         String token = getJwtToken();
 
         utilsService.makeRequest(Request.Method.GET, url, null, responseListener, errorListener, token);
+    }
+
+    public void deleteNote(String id,Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
+        String url = ApiConfig.BASE_URL + "/notes/delete/" + id;
+        String token = getJwtToken();
+
+        utilsService.makeRequest(Request.Method.DELETE, url, null, responseListener, errorListener, token);
+    }
+
+    public void updateNote(String id,Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
+        String url = ApiConfig.BASE_URL + "/notes/update/" + id;
+        String token = getJwtToken();
+
+        utilsService.makeRequest(Request.Method.PUT, url, null, responseListener, errorListener, token);
     }
 
     private String getJwtToken() {

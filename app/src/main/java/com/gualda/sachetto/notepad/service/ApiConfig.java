@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ApiConfig {
-    public static final String BASE_URL = "http://192.168.1.16/api_notepad/public/api/v1";
+    public static final String BASE_URL = "http://192.168.0.43/api_notepad/public/api/v1";
 
     public static Map<String, String> configHeaders(String token) {
         Map<String, String> headers = new HashMap<>();
