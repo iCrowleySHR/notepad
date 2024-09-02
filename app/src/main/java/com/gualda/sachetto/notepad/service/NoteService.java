@@ -57,11 +57,22 @@ public class NoteService {
         utilsService.makeRequest(Request.Method.DELETE, url, null, responseListener, errorListener, token);
     }
 
-    public void updateNote(String id,Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
-        String url = ApiConfig.BASE_URL + "/notes/update/" + id;
+    public void updateNote(Note note,Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
+        String url = ApiConfig.BASE_URL + "/notes/update/" + note.getIdNote();
         String token = getJwtToken();
 
-        utilsService.makeRequest(Request.Method.PUT, url, null, responseListener, errorListener, token);
+        JSONObject noteData = new JSONObject();
+        try {
+            noteData.put("title", note.getTitle());
+            noteData.put("content", note.getContent());
+            noteData.put("category", note.getCategory());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Erro ao criar JSON", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        utilsService.makeRequest(Request.Method.PUT, url, noteData, responseListener, errorListener, token);
     }
 
     private String getJwtToken() {
