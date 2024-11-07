@@ -50,6 +50,13 @@ public class NoteService {
         utilsService.makeRequest(Request.Method.GET, url, null, responseListener, errorListener, token);
     }
 
+    public void searchNote(Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener, String title){
+        String url = ApiConfig.BASE_URL + "/notes/search/" + title;
+        String token = getJwtToken();
+
+        utilsService.makeRequest(Request.Method.GET, url, null, responseListener, errorListener, token);
+    }
+
     public void deleteNote(String id,Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener){
         String url = ApiConfig.BASE_URL + "/notes/delete/" + id;
         String token = getJwtToken();

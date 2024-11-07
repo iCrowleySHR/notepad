@@ -3,10 +3,15 @@ package com.gualda.sachetto.notepad.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,6 +38,7 @@ public class HomeFragment extends Fragment {
 
     private ListView listViewNotes;
     private NoteAdapter adapter;
+    EditText edtSearch;
     private ArrayList<Note> notesList;
     private NoteService noteService;
 
@@ -61,12 +67,36 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         listViewNotes = view.findViewById(R.id.listViewNotes);
+        edtSearch = view.findViewById(R.id.edtSearch);
         notesList = new ArrayList<>();
         adapter = new NoteAdapter(getContext(), notesList);
         listViewNotes.setAdapter(adapter);
 
         noteService = new NoteService(getContext());
         fetchNotes();
+
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                notesList.clear();
+                adapter.notifyDataSetChanged();
+
+                if (charSequence.length() > 0) {
+                    searchNote(charSequence.toString());
+                }else{
+                    fetchNotes();
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         listViewNotes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -100,7 +130,7 @@ public class HomeFragment extends Fragment {
                         String id = noteObject.getString("id");
                         String content = noteObject.getString("content");
                         String category = noteObject.optString("category", "Sem categoria");
-                        
+
                         Note note = new Note();
                         note.setTitle(title);
                         note.setContent(content);
@@ -119,5 +149,40 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), "Erro ao carregar notas: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void searchNote(String note){
+        noteService.searchNote(new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                notesList.clear();
+                try {
+                    JSONArray notesArray = response.getJSONArray("data");
+                    for (int i = 0; i < notesArray.length(); i++) {
+                        JSONObject noteObject = notesArray.getJSONObject(i);
+                        String title = noteObject.getString("title");
+                        String id = noteObject.getString("id");
+                        String content = noteObject.getString("content");
+                        String category = noteObject.optString("category", "Sem categoria");
+
+                        Note note = new Note();
+                        note.setTitle(title);
+                        note.setContent(content);
+                        note.setCategory(category);
+                        note.setIdNote(id);
+                        notesList.add(note);
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), "Erro ao processar as notas: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                adapter.notifyDataSetChanged();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                notesList.clear();
+                Toast.makeText(getContext(), "Erro ao carregar notas: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }, note);
     }
 }
