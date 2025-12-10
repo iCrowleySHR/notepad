@@ -46,6 +46,19 @@ Observação: O bloco acima não utiliza formatação de código e está apenas 
 
 ---
 
+
+##  Integração com API Externa
+
+Este aplicativo consome uma **API que está em outro repositório**, responsável por gerenciar dados como usuários, notas, autenticação ou outros serviços.
+
+### Como funciona a comunicação
+
+* O app envia requisições HTTP usando serviços dentro de `service/`.]
+  
+<a href=""> Clique aqui para acessar o repositório da API </a>
+
+---
+
 ##  Como Executar o Projeto
 
 1. Instale o **Android Studio** (recomendado versão mais recente)
@@ -76,3 +89,6 @@ Este projeto é de uso pessoal do autor. Ajuste conforme necessário caso deseje
 ##  Autor
 
 Desenvolvido por **Gustavo Gualda**.
+
+
+
