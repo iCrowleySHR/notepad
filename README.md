@@ -55,7 +55,7 @@ Este aplicativo consome uma **API que está em outro repositório**, responsáve
 
 * O app envia requisições HTTP usando serviços dentro de `service/`.]
   
-<a href=""> Clique aqui para acessar o repositório da API </a>
+<a href="https://github.com/iCrowleySHR/api_notepad.git"> Clique aqui para acessar o repositório da API </a>
 
 ---
 
